@@ -3,68 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etherea - Interactive Artist Unveil Mockup</title>
-  <!-- Tailwind CSS CDN for quick glassmorphism styling -->
+  <title>Etherea - Celestial Artist Unveil</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Etherea & Navrasa Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Yatra+One&display=swap" rel="stylesheet">
+  
   <style>
     body {
-      background-color: #05020a;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at center, #1b0230 0%, #080012 100%);
+      font-family: 'Cinzel', serif;
+    }
+    .font-devanagari {
+      font-family: 'Yatra One', cursive;
+    }
+    /* Celestial Nebula Canvas background effect */
+    .nebula-bg {
+      background: radial-gradient(ellipse at top, rgba(147, 51, 234, 0.3) 0%, rgba(15, 2, 31, 0.95) 70%);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 text-white">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 text-white nebula-bg relative overflow-x-hidden">
 
-  <!-- Header / Context for Review -->
-  <div class="text-center mb-8 max-w-xl">
-    <span class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Taarangana '26 • Mockup Preview</span>
-    <h1 class="text-3xl font-bold mt-1 text-slate-100">"Etherea" Interactive Lineup Reveal</h1>
-    <p class="text-gray-400 text-sm mt-2">Scratch or swipe across the golden surface below to reveal the secret flagship headliner.</p>
+  <!-- Floating Ambient Stars/Particles -->
+  <div class="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(#ffd700_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+  <!-- Header Section styled after Navrasa / Etherea theme -->
+  <div class="text-center mb-8 max-w-xl z-10">
+    <span class="text-amber-400/90 text-sm font-devanagari tracking-widest uppercase text-xl">तारांगणा '26 • एथेरिया</span>
+    <h1 class="text-4xl font-black mt-1 text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 drop-shadow-[0_2px_10px_rgba(255,215,0,0.3)]">
+      Etherea Unveil
+    </h1>
+    <p class="text-purple-200/80 text-xs mt-2 tracking-widest font-sans">
+      Scratch the golden celestial mandala to reveal the mystery headliner.
+    </p>
   </div>
 
-  <!-- Main Card Container -->
-  <div class="relative w-full max-w-sm h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30 bg-[#0b061a]">
+  <!-- Main Card Container with Traditional Glass Frame -->
+  <div class="relative w-full max-w-sm h-[520px] rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(147,51,234,0.3)] border border-amber-500/40 bg-[#0e031e]/90 backdrop-blur-xl z-10">
     
-    <!-- Revealed Base Content Layer -->
-    <div class="absolute inset-0 flex flex-col justify-between p-6 bg-gradient-to-b from-[#1a0f2e] to-[#0b061a]">
+    <!-- Revealed Card Layer (Traditional Glass Motif) -->
+    <div class="absolute inset-0 flex flex-col justify-between p-6 bg-gradient-to-b from-[#1b0533]/90 via-[#0f021f]/95 to-[#080012]">
       
-      <!-- Artist Image Card -->
-      <div class="relative w-full h-64 rounded-2xl overflow-hidden border border-amber-400/20 shadow-inner">
+      <!-- Artist Image Holder with Silver/Gold Metallic Border -->
+      <div class="relative w-full h-64 rounded-2xl overflow-hidden border-2 border-amber-400/40 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
         <img 
           src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80" 
-          alt="Artist Reveal" 
-          className="w-full h-full object-cover"
+          alt="Artist Unveiled" 
           style="width: 100%; height: 100%; object-fit: cover;"
         />
-        <div class="absolute top-3 right-3 bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3 py-1 rounded-full text-xs font-semibold uppercase">
+        <div class="absolute top-3 right-3 bg-purple-950/80 backdrop-blur-md border border-amber-400/60 text-amber-300 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-lg">
           Day 2 • 8:00 PM
         </div>
       </div>
 
-      <!-- Artist Details -->
+      <!-- Details in Devanagari/Cinzel Style -->
       <div class="space-y-1 my-2">
-        <p class="text-amber-400 text-xs font-medium tracking-widest uppercase">Flagship Pronite Act</p>
-        <h2 class="text-2xl font-bold tracking-tight text-white">Mystery Headliner</h2>
-        <p class="text-gray-400 text-sm">Sufi Fusion & Contemporary Beats</p>
+        <p class="text-amber-400 text-[11px] font-devanagari tracking-widest uppercase">वीर रस • Flagship Pronite Act</p>
+        <h2 class="text-2xl font-bold tracking-tight text-amber-100">Mystery Headliner</h2>
+        <p class="text-purple-200/70 text-xs font-sans">Celestial Sufi Fusion & Modern Electro Beats</p>
       </div>
 
-      <!-- Action Button -->
+      <!-- Unlocked Action Button -->
       <button 
         id="shareBtn"
         disabled 
-        class="w-full py-3 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-white/5 text-gray-500 border border-white/10 cursor-not-allowed">
-        🔒 Scratch Above to Unlock
+        class="w-full py-3 rounded-xl font-semibold text-xs tracking-widest uppercase transition-all duration-500 bg-purple-950/50 text-purple-400/50 border border-purple-800/40 cursor-not-allowed font-sans">
+        🔒 Scratch Mandala to Reveal
       </button>
     </div>
 
-    <!-- Scratch Canvas Layer -->
+    <!-- Scratch Canvas Layer (Golden Mandala Overlay) -->
     <canvas 
       id="scratchCanvas" 
-      class="absolute inset-0 cursor-pointer touch-none transition-opacity duration-700">
+      class="absolute inset-0 cursor-pointer touch-none transition-opacity duration-1000 z-20">
     </canvas>
   </div>
 
-  <!-- JavaScript Interaction Script -->
+  <!-- JavaScript Rendering Logic -->
   <script>
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
@@ -78,31 +95,55 @@
       canvas.width = rect.width;
       canvas.height = rect.height;
 
-      // Golden Etherea Gradient Background
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#d4af37');
-      gradient.addColorStop(0.5, '#ffdf00');
-      gradient.addColorStop(1, '#8b6508');
-      ctx.fillStyle = gradient;
+      // 1. Deep Celestial Purple Background
+      const bgGrad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 10, canvas.width/2, canvas.height/2, canvas.width);
+      bgGrad.addColorStop(0, '#3b0764');
+      bgGrad.addColorStop(0.6, '#1e053a');
+      bgGrad.addColorStop(1, '#0a0117');
+      ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Traditional Mandala Pattern Dots Overlay
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
-      for (let i = 0; i < canvas.width; i += 20) {
-        for (let j = 0; j < canvas.height; j += 20) {
-          if ((i + j) % 40 === 0) {
-            ctx.beginPath();
-            ctx.arc(i, j, 5, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
+      // 2. Draw Golden Concentric Mandala Patterns
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.45)';
+      ctx.lineWidth = 1.5;
+
+      // Outer & Inner Mandala Rings
+      [40, 80, 120, 160].forEach(radius => {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+
+      // Petal Line Art Geometry
+      const petals = 12;
+      for (let i = 0; i < petals; i++) {
+        const angle = (i * Math.PI * 2) / petals;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(centerX + Math.cos(angle) * 170, centerY + Math.sin(angle) * 170);
+        ctx.stroke();
       }
 
-      // Instruction Text
-      ctx.font = 'bold 16px sans-serif';
-      ctx.fillStyle = '#110726';
+      // 3. Shimmering Gold Dust Speckles
+      ctx.fillStyle = 'rgba(255, 223, 0, 0.6)';
+      for (let i = 0; i < 150; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        ctx.beginPath();
+        ctx.arc(x, y, Math.random() * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 4. Center Golden Prompt Text
+      ctx.font = 'bold 13px Cinzel, serif';
+      ctx.fillStyle = '#FFD700';
       ctx.textAlign = 'center';
-      ctx.fillText('✨ SCRATCH TO UNVEIL ARTIST ✨', canvas.width / 2, canvas.height / 2);
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+      ctx.shadowBlur = 6;
+      ctx.fillText('✨ SCRATCH THE MANDALA ✨', centerX, centerY + 4);
     }
 
     function checkScratchAmount() {
@@ -121,9 +162,9 @@
         canvas.style.opacity = '0';
         canvas.style.pointerEvents = 'none';
 
-        // Unlock Button
+        // Unlock Button with Glowing Gradient Effect
         shareBtn.disabled = false;
-        shareBtn.className = "w-full py-3 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/20 hover:scale-105";
+        shareBtn.className = "w-full py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all duration-300 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.5)] hover:scale-105 font-sans cursor-pointer";
         shareBtn.innerText = "✨ Share Announcement to Story";
       }
     }
@@ -136,13 +177,13 @@
 
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(x, y, 35, 0, Math.PI * 2);
+      ctx.arc(x, y, 38, 0, Math.PI * 2);
       ctx.fill();
 
       checkScratchAmount();
     }
 
-    // Event Listeners for Mouse and Touch
+    // Touch & Mouse Event Listeners
     canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e.clientX, e.clientY); });
     canvas.addEventListener('mousemove', (e) => { if (isDrawing) scratch(e.clientX, e.clientY); });
     window.addEventListener('mouseup', () => isDrawing = false);
@@ -156,7 +197,6 @@
     });
     window.addEventListener('touchend', () => isDrawing = false);
 
-    // Initialize on load
     window.onload = initCanvas;
   </script>
 </body>
