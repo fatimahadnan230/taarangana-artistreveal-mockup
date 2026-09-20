@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etherea - Interactive Artist Unveil Mockup</title>
+  <!-- Tailwind CSS CDN for quick glassmorphism styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #05020a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 text-white">
+
+  <!-- Header / Context for Review -->
+  <div class="text-center mb-8 max-w-xl">
+    <span class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Taarangana '26 • Mockup Preview</span>
+    <h1 class="text-3xl font-bold mt-1 text-slate-100">"Etherea" Interactive Lineup Reveal</h1>
+    <p class="text-gray-400 text-sm mt-2">Scratch or swipe across the golden surface below to reveal the secret flagship headliner.</p>
+  </div>
+
+  <!-- Main Card Container -->
+  <div class="relative w-full max-w-sm h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30 bg-[#0b061a]">
+    
+    <!-- Revealed Base Content Layer -->
+    <div class="absolute inset-0 flex flex-col justify-between p-6 bg-gradient-to-b from-[#1a0f2e] to-[#0b061a]">
+      
+      <!-- Artist Image Card -->
+      <div class="relative w-full h-64 rounded-2xl overflow-hidden border border-amber-400/20 shadow-inner">
+        <img 
+          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80" 
+          alt="Artist Reveal" 
+          className="w-full h-full object-cover"
+          style="width: 100%; height: 100%; object-fit: cover;"
+        />
+        <div class="absolute top-3 right-3 bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3 py-1 rounded-full text-xs font-semibold uppercase">
+          Day 2 • 8:00 PM
+        </div>
+      </div>
+
+      <!-- Artist Details -->
+      <div class="space-y-1 my-2">
+        <p class="text-amber-400 text-xs font-medium tracking-widest uppercase">Flagship Pronite Act</p>
+        <h2 class="text-2xl font-bold tracking-tight text-white">Mystery Headliner</h2>
+        <p class="text-gray-400 text-sm">Sufi Fusion & Contemporary Beats</p>
+      </div>
+
+      <!-- Action Button -->
+      <button 
+        id="shareBtn"
+        disabled 
+        class="w-full py-3 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-white/5 text-gray-500 border border-white/10 cursor-not-allowed">
+        🔒 Scratch Above to Unlock
+      </button>
+    </div>
+
+    <!-- Scratch Canvas Layer -->
+    <canvas 
+      id="scratchCanvas" 
+      class="absolute inset-0 cursor-pointer touch-none transition-opacity duration-700">
+    </canvas>
+  </div>
+
+  <!-- JavaScript Interaction Script -->
+  <script>
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+    const shareBtn = document.getElementById('shareBtn');
+
+    let isDrawing = false;
+    let isRevealed = false;
+
+    function initCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      // Golden Etherea Gradient Background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, '#d4af37');
+      gradient.addColorStop(0.5, '#ffdf00');
+      gradient.addColorStop(1, '#8b6508');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Traditional Mandala Pattern Dots Overlay
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+      for (let i = 0; i < canvas.width; i += 20) {
+        for (let j = 0; j < canvas.height; j += 20) {
+          if ((i + j) % 40 === 0) {
+            ctx.beginPath();
+            ctx.arc(i, j, 5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+
+      // Instruction Text
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillStyle = '#110726';
+      ctx.textAlign = 'center';
+      ctx.fillText('✨ SCRATCH TO UNVEIL ARTIST ✨', canvas.width / 2, canvas.height / 2);
+    }
+
+    function checkScratchAmount() {
+      if (isRevealed) return;
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const pixels = imageData.data;
+      let clearPixels = 0;
+
+      for (let i = 3; i < pixels.length; i += 4) {
+        if (pixels[i] === 0) clearPixels++;
+      }
+
+      const percent = (clearPixels / (pixels.length / 4)) * 100;
+      if (percent > 35) {
+        isRevealed = true;
+        canvas.style.opacity = '0';
+        canvas.style.pointerEvents = 'none';
+
+        // Unlock Button
+        shareBtn.disabled = false;
+        shareBtn.className = "w-full py-3 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/20 hover:scale-105";
+        shareBtn.innerText = "✨ Share Announcement to Story";
+      }
+    }
+
+    function scratch(clientX, clientY) {
+      if (isRevealed) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 35, 0, Math.PI * 2);
+      ctx.fill();
+
+      checkScratchAmount();
+    }
+
+    // Event Listeners for Mouse and Touch
+    canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e.clientX, e.clientY); });
+    canvas.addEventListener('mousemove', (e) => { if (isDrawing) scratch(e.clientX, e.clientY); });
+    window.addEventListener('mouseup', () => isDrawing = false);
+
+    canvas.addEventListener('touchstart', (e) => {
+      isDrawing = true;
+      scratch(e.touches[0].clientX, e.touches[0].clientY);
+    });
+    canvas.addEventListener('touchmove', (e) => {
+      if (isDrawing) scratch(e.touches[0].clientX, e.touches[0].clientY);
+    });
+    window.addEventListener('touchend', () => isDrawing = false);
+
+    // Initialize on load
+    window.onload = initCanvas;
+  </script>
+</body>
+</html>
